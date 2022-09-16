@@ -7,10 +7,14 @@ This project is a fast implementation of the seam-carving technique which resize
 
 1. Compute the dual-gradient energy function, which calculates the energy - the perceptual importance - of each pixel of the image. The energy is high for pixels in the image where there is a rapid colour change (such as the boundary between a human face and the background). The seam-carving technique avoids removing such high-energy pixels.
     
-    The energy of pixel (y,x) is $ \sprt{\Delta_x^2(y,x) + \Delta_y^2(y,x)}$. 
-    Here, $ \Delta_x^2(y,x) = R_x (y,x)^2 + G_x (y,x)^2 + B_x (y,x)^2 $
-          $ \Delta_y^2(y,x) = R_y (y,x)^2 + G_y (y,x)^2 + B_y (y,x)^2 $
-    $ R_x, R_y, ..., B_Y $ are the differences in the red, green, and blue components of pixels surrounding the central pixels, along the x and y-axis. For example, $ R_x (y,x) = (y,x+1)_red - (y,x-1)_red $
+    The energy of pixel (y,x) is 
+    $\sqrt{\Delta_x^2(y,x) + \Delta_y^2(y,x)}$. 
+    Here, 
+    
+    $\Delta_x^2(y,x) = R_x (y,x)^2 + G_x (y,x)^2 + B_x (y,x)^2 $     
+    $\Delta_y^2(y,x) = R_y (y,x)^2 + G_y (y,x)^2 + B_y (y,x)^2 $
+    
+    $R_x, R_y, ..., B_Y$ are the differences in the red, green, and blue components of pixels surrounding the central pixels, along the x and y-axis. For example, $R_x (y,x) = (y,x+1)(red) - (y,x-1)(red) $
 
 Note: In image processing, pixel (y,x) refers to the pixel in column x and row y, with pixel (0,0) at the upper-left corner and pixel (H-1,W-1) at the lower-right corner.
 
@@ -35,7 +39,7 @@ Note: In image processing, pixel (y,x) refers to the pixel in column x and row y
     - `destroy_image`: frees up the memory allocated for an image
     - `print_grad`: prints the dual-gradient energy 
 
-- `c_img.h`: declares C functions written in c_img.c and macro definitions, which are to be shared between several source files
+- `c_img.h`: declares C functions written in `c_img.c` and macro definitions, which are to be shared between several source files
     - `rgb_img`: specifies the structure of 'rgb_img' for each image to be reduced
 
 - `seamcarving.c`:
@@ -44,7 +48,7 @@ Note: In image processing, pixel (y,x) refers to the pixel in column x and row y
     - `recover_path`: allocates a path through the minimum seam as defined by the array best.
     - `remove_seam`: creates the destination image, and writes to it the source image, with the seam removed.
 
-- `seamcarving.h`: declares C functions written in seamcarving.c and macro definitions, which are to be shared between several source files
+- `seamcarving.h`: declares C functions written in `seamcarving.c` and macro definitions, which are to be shared between several source files
 
 - `png2bin`: changes a png file to a bin file for easier processing. Lines 38-52 illustrated example png-to-bin or bin-to-png commands.
 
